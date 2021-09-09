@@ -1,0 +1,50 @@
+#include <stdio.h>
+#include <malloc.h>
+#include <math.h>
+
+struct Roots {
+    float *x1;
+    float *x2;
+};
+
+struct Roots *SolveSquare(float a, float b, float c) {
+    struct Roots *solves = malloc(sizeof(struct Roots));
+    solves->x1 = NULL;
+    solves->x2 = NULL;
+    if ((a == 0) && (b != 0)) {
+        float *d = malloc(sizeof(float));
+        *d = (-c / b);
+        solves->x1 = d;
+    } else if ((a != 0) && (b != 0)) {
+        float D = ((b * b) - (4 * a * c));
+        if (D>=0) {
+            float *x1Adress = malloc(sizeof(float));
+            float *x2Adress = malloc(sizeof(float));
+            *x1Adress = ((-b - (float) sqrt((double) D)) / (2 * a));
+            *x2Adress = ((-b + (float) sqrt((double) D)) / (2 * a));
+            solves->x1 = x1Adress;
+            solves->x2 = x2Adress;
+        };
+    } else {
+        solves->x1 = NULL;
+        solves->x2 = NULL;
+    };
+    return solves;
+};
+
+int main() {
+    struct Roots *twoRoots;
+    float a, b, c;
+    printf("Enter a,b,c:\n");
+    scanf("%f", &a);
+    scanf("%f", &b);
+    scanf("%f", &c);
+    twoRoots = SolveSquare(a, b, c);
+    if ((twoRoots->x1 == NULL) && (twoRoots->x2 == NULL)) {
+        printf("There is no roots");
+    } else {
+        printf("Roots are %f ", *twoRoots->x1);
+        printf("%f", *twoRoots->x2);
+    };
+    return 0;
+};
