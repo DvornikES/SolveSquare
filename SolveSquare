@@ -12,9 +12,9 @@ struct Roots *SolveSquare(float a, float b, float c) {
     solves->x1 = NULL;
     solves->x2 = NULL;
     if ((a == 0) && (b != 0)) {
-        float *d = malloc(sizeof(float));
-        *d = (-c / b);
-        solves->x1 = d;
+        float *xAdress = malloc(sizeof(float));
+        *xAdress = (-c / b);
+        solves->x1 = xAdress;
     } else if ((a != 0) && (b != 0)) {
         float D = ((b * b) - (4 * a * c));
         if (D>=0) {
